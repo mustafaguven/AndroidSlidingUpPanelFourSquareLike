@@ -23,11 +23,13 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,7 +44,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity implements SlidingUpPanelLayout.PanelSlideListener {
 
-    private ListView mListView;
+    RelativeLayout rlOrnek;
+
+    //private ListView mListView;
     private SlidingUpPanelLayout mSlidingUpPanelLayout;
 
     private View mTransparentHeaderView;
@@ -59,15 +63,17 @@ public class MainActivity extends Activity implements SlidingUpPanelLayout.Panel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mListView = (ListView) findViewById(R.id.list);
-        mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+        //mListView = (ListView) findViewById(R.id.list);
+        //mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
 
         mSlidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingLayout);
         mSlidingUpPanelLayout.setEnableDragViewTouchEvents(true);
 
+        rlOrnek = (RelativeLayout)findViewById(R.id.rlOrnek);
+
         int mapHeight = getResources().getDimensionPixelSize(R.dimen.map_height);
         mSlidingUpPanelLayout.setPanelHeight(mapHeight); // you can use different height here
-        mSlidingUpPanelLayout.setScrollableView(mListView, mapHeight);
+        mSlidingUpPanelLayout.setScrollableView(rlOrnek, mapHeight);
 
         mSlidingUpPanelLayout.setPanelSlideListener(this);
 
@@ -78,19 +84,19 @@ public class MainActivity extends Activity implements SlidingUpPanelLayout.Panel
         mTransparentHeaderView = LayoutInflater.from(this).inflate(R.layout.transparent_header_view, null, false);
         mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
 
-        ArrayList<String> testData = new ArrayList<String>(100);
+  /*      ArrayList<String> testData = new ArrayList<String>(100);
         for (int i = 0; i < 100; i++) {
             testData.add("Item " + i);
-        }
-        mListView.addHeaderView(mTransparentHeaderView);
-        mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.simple_list_item, testData));
+        }*/
+        //mListView.addHeaderView(mTransparentHeaderView);
+        /*mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.simple_list_item, testData));
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mSlidingUpPanelLayout.collapsePane();
             }
         });
-        collapseMap();
+        collapseMap();*/
 
         mMapFragment = MapFragment.newInstance();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -142,13 +148,15 @@ public class MainActivity extends Activity implements SlidingUpPanelLayout.Panel
     }
 
     private void collapseMap() {
+        Log.e("EVENT", "collapseMap");
         mSpaceView.setVisibility(View.VISIBLE);
-        mTransparentView.setVisibility(View.GONE);
+        //mTransparentView.setVisibility(View.GONE);
     }
 
     private void expandMap() {
+        Log.e("EVENT", "expandMap");
         mSpaceView.setVisibility(View.GONE);
-        mTransparentView.setVisibility(View.INVISIBLE);
+        //mTransparentView.setVisibility(View.INVISIBLE);
     }
 
     @Override

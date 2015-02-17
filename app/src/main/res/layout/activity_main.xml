@@ -31,12 +31,20 @@
 
             <View
                 android:id="@+id/transparentView"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/map_height"
                 android:layout_alignParentTop="true"/>
 
-            <ListView
+            <RelativeLayout
+                android:id="@+id/rlOrnek"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/transparentView"
+                android:background="@drawable/unnamed">
+            </RelativeLayout>
+
+            <!--<ListView
                 android:id="@+id/list"
                 android:cacheColorHint="@android:color/white"
                 android:drawSelectorOnTop="true"
@@ -46,7 +54,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_below="@id/transparentView"
-                android:smoothScrollbar="false"/>
+                android:smoothScrollbar="false"/>-->
         </RelativeLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
